@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Binary Counter</title>
+    <style>
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid black;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .filled {
+            background-color: black;
+        }
+
+        .label {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: #B0B0B0; /* Grayed-out color */
+        }
+
+        #binary-counter {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .label-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px; /* Adjust the gap as needed */
+        }
+
+        sup {
+            font-size: 0.8em;
+            vertical-align: super;
+            color: #B0B0B0; /* Grayed-out color */
+        }
+
+        .decimal-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        html {
+            zoom: 400%;
+        }
+    </style>
+</head>
+<body>
+    <div id="binary-counter">
+        <div class="label-container">
+            <div class="label">2<sup>7</sup></div>
+            <div class="label-decimal">128</div>
+            <div class="circle"></div>
+        </div>
+        <div class="label-container">
+            <div class="label">2<sup>6</sup></div>
+            <div class="label-decimal">64</div>
+            <div class="circle"></div>
+        </div>
+        <div class="label-container">
+            <div class="label">2<sup>5</sup></div>
+            <div class="label-decimal">32</div>
+            <div class="circle"></div>
+        </div>
+        <div class="label-container">
+            <div class="label">2<sup>4</sup></div>
+            <div class="label-decimal">16</div>
+            <div class="circle"></div>
+        </div>
+        <div class="label-container">
+            <div class="label">2<sup>3</sup></div>
+            <div class="label-decimal">8</div>
+            <div class="circle"></div>
+        </div>
+        <div class="label-container">
+            <div class="label">2<sup>2</sup></div>
+            <div class="label-decimal">4</div>
+            <div class="circle"></div>
+        </div>
+        <div class="label-container">
+            <div class="label">2<sup>1</sup></div>
+            <div class="label-decimal">2</div>
+            <div class="circle"></div>
+        </div>
+        <div class="label-container">
+            <div class="label">2<sup>0</sup></div>
+            <div class="label-decimal">1</div>
+            <div class="circle"></div>
+        </div>
+    </div>
+    <div class="decimal-value">0</div>
+    <script>
+        const circles = document.querySelectorAll('#binary-counter .circle');
+        const decimalValueElement = document.querySelector('.decimal-value');
+
+        function calculateDecimalValue() {
+            let decimalValue = 0;
+            circles.forEach((circle, index) => {
+                if (circle.classList.contains('filled')) {
+                    decimalValue += Math.pow(2, circles.length - index - 1);
+                }
+            });
+            decimalValueElement.textContent = decimalValue;
+        }
+
+        circles.forEach(circle => {
+            circle.addEventListener('click', () => {
+                circle.classList.toggle('filled');
+                calculateDecimalValue();
+            });
+        });
+    </script>
+</body>
+</html>
